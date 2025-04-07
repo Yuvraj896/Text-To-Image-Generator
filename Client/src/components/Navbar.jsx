@@ -2,12 +2,19 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import { motion } from "framer-motion";
+
 
 const Navbar = () => {
-    const {user} = useContext(AppContext)
+    const {user, setShowLogin} = useContext(AppContext)
     const navigate = useNavigate();
     return (
-    <div className="flex items-center justify-between py-4">
+    <motion.div
+    initial={{opacity:0.4, y:-20}}
+    transition={{duration:1}}
+    whileInView={{opacity:1, y:0}}  
+    viewport={{once:true}}
+    className="flex items-center justify-between py-4">
       <Link to="/">
         <img
           className="w-28 sm:w-28 md:w-32 lg:w-40"
@@ -41,13 +48,13 @@ const Navbar = () => {
             <h3 onClick={() => navigate("/buy")} className="cursor-pointer">
               Pricing
             </h3>
-            <button className="px-7 py-2 bg-zinc-800 rounded-full text-white sm:px-3 ">
+            <button onClick={()=> setShowLogin(true)} className="px-7 py-2 bg-zinc-800 rounded-full text-white sm:px-3 ">
               Login
             </button>
           </div>
         }
       </div>
-    </div>
+    </motion.div>
   );
 };
 
