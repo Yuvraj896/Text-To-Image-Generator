@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 
 
 const Navbar = () => {
-    const {user, setShowLogin} = useContext(AppContext)
+    const {user,setUser, setShowLogin, setToken ,token, logout ,credit} = useContext(AppContext)
     const navigate = useNavigate();
+    
     return (
     <motion.div
     initial={{opacity:0.4, y:-20}}
@@ -28,15 +29,15 @@ const Navbar = () => {
           <div className="flex items-center gap-2 sm:gap-3" >
             <button onClick={()=> navigate('/buy')} className="flex items-center gap-[4px] bg-blue-100 px-4 sm:px-4 py-1.5 sm:py-2 rounded-full hover:scale-105 transition-all">
                 <img src={assets.credit_star} className="w-5" alt="" />   
-                <p className="text-xs sm:text-sm font-medium text-gray-600">Credits left : 50</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Credits left : {credit}</p>
             </button>
             
-            <h3 className="text-gray-600 max:sm-hidden pl-4" >Hi, Yuvraj</h3>
+            <h3 className="text-gray-600 max:sm-hidden pl-4" >Hi, {user.name}</h3>
             <div className="relative group">
                 <img src={assets.profile_icon} className="w-10 drop-shadow" alt="" />   
                 <div className=" absolute hidden group-hover:block top-0 right-[-50px] z-10 text-black rounded p-12">
                     <ul className="list-none text-sm bg-white p-2 rounded-md border m-0">
-                        <li className="cursor-pointer pr-4 ">LogOut</li>
+                        <li onClick={logout} className="cursor-pointer pr-4 ">LogOut</li>
                     </ul>
                 </div>
             </div>
